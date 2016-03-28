@@ -1,0 +1,23 @@
+doctype html
+html(lang="en")
+  head
+    meta(
+      charset="utf-8"
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    )
+    title= title
+    link(rel="stylesheet" href="/stylesheets/main.css")
+    link(rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css")
+  body
+    include page/header
+    .container
+      .row
+        block content
+      include page/footer
+    script(src="/bower_components/jquery/dist/jquery.js")
+    script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
+    script(src="/bower_components/bootstrap/js/collapse.js")
+    script(src="/bower_components/bootstrap/js/carousel.js")
+    script(src="/bower_components/bootstrap/js/popover.js")
+    script(src="/javascripts/main.js")

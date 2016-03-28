@@ -1,0 +1,277 @@
+nav.navbar.navbar-default.navbar-fixed-top
+  .container
+    navbar-header
+      button.navbar-toggle.collapsed(
+        type="button"
+        data-toggle="collapse"
+        data-target="#navMenu"
+        aria-expanded="false"
+      )
+        span.sr-only Toggle navigation
+      - for (var z = 0; z < 3; z++)
+        span.icon-bar
+      a.navbar-brand(href="/") Lost & Found
+    .collapse.navbar-collapse#navMenu
+      ul.nav.navbar-nav
+        li
+          a(
+            href="/index"
+          )
+            span.glyphicon.glyphicon-home(
+              aria-hidden="true"
+            ) &nbsp;首页
+        li.divider(role="separator")
+        li.dropdown
+          a.dropdown-toggle(
+            role="button"
+            data-toggle="dropdown"
+            aria-haspopup="true"
+            aria-expanded="false"
+          ) 
+            span.glyphicon.glyphicon-envelope(
+              aria-hidden="true"
+            ) &nbsp;信息&nbsp;
+            span.glyphicon.glyphicon-chevron-down
+            //- span.caret
+          ul.dropdown-menu
+            li
+              a(href="/message/lost")
+                span.glyphicon.glyphicon-export(
+                  aria-hidden="true"
+                ) &nbsp;丢失
+            li
+              a(href="/message/found")
+                span.glyphicon.glyphicon-import(
+                  aria-hidden="true"
+                ) &nbsp;拾取
+        li.divider(role="separator")
+        li
+          a(
+            href="/search"
+          )
+            span.glyphicon.glyphicon-search(
+              aria-hidden="true"
+            ) &nbsp;搜索
+        //- if user
+        //-   li
+        //-     a(href="/user/userdetail") 用户  
+      if user
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(
+              type="button"
+              href="/user/logout"
+            ) 
+              span.glyphicon.glyphicon-log-out(
+                aria-hidden="true"
+              ) &nbsp;登出
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(
+              type="button"
+              id="user.name"
+              href="/user/userdetail"
+            )
+              span.glyphicon.glyphicon-user(
+                aria-hidden="true"
+              ) &nbsp;#{user.name}
+      else
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(
+              type="button"
+              id="RegisterBtn"
+              data-toggle="modal"
+              data-target="#registermodal"
+            ) 
+              span.glyphicon.glyphicon-new-window(
+                aria-hidden="true"
+              ) &nbsp;注册
+        ul.nav.navbar-nav.navbar-right
+          li
+            a(
+              type="button"
+              id="LoginBtn"
+              data-toggle="modal"
+              data-target="#loginmodal"
+            ) 
+              span.glyphicon.glyphicon-log-in(
+                aria-hidden="true"
+              ) &nbsp;登录
+      //- ul.nav.navbar-nav.navbar-right
+      //-   form.navbar-form(role="search")
+      //-     .form-group
+      //-       input.form-control(type="text" placeholder="Search")
+      //-     button.btn.btn-default(type="submit") Submit
+// 注册模态框
+.modal.fade(
+  id="registermodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+)
+  .modal-dialog(role="document") 
+    .modal-content
+      .modal-header
+        button.close(
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        )
+          span(aria-hidden="true") &times;
+        h4.modal-title 注册
+      form.form-horizontal(
+        method="post"
+        action="/user/register"
+        onsubmit="return check('register')"
+      ) 
+        .modal-body
+          .form-group
+            label.col-md-3.control-label(
+                for="registername"
+              ) 用户名
+            .col-md-8
+              input.form-control(
+                type="text"
+                id="registername"
+                name="user[name]"
+                placeholder="起个名呗"
+              )
+          .form-group
+            label.col-md-3.control-label(
+                for="registerpsw"
+              ) 密码
+            .col-md-8
+              input.form-control(
+                type="password"
+                id="registerpsw"
+                name="user[password]"
+                placeholder="设个密码呗"
+              )
+          .form-group
+            label.col-md-3.control-label(
+                for="registerpswconf"
+              ) 密码确认
+            .col-md-8
+              input.form-control(
+                type="password"
+                id="registerpswconf"
+                placeholder="要和密码一样呢"
+              )
+          .form-group
+            label.col-md-3.control-label(
+                for="registerphone"
+              ) 手机号
+            .col-md-8
+              input.form-control(
+                type="text"
+                id="registerphone"
+                name="user[phone]"                  
+                placeholder="留个手机呗"
+              )
+          .form-group
+            label.col-md-3.control-label(
+                for="registerQQ"
+              ) QQ
+            .col-md-8
+              input.form-control(
+                type="text"
+                id="registerQQ"
+                name="user[QQ]"                  
+                placeholder="留个QQ呗"
+              )
+          .form-group
+            label.col-md-3.control-label(
+                for="registercollege"
+              ) 学院
+            .col-md-8
+              input.form-control(
+                type="text"
+                id="registercollege"
+                name="user[college]"                  
+                placeholder="你是哪个学院的呢"
+              )
+          .form-group
+            label.col-md-3.control-label(
+                for="registeremail"
+              ) 邮箱
+            .col-md-8
+              input.form-control(
+                type="email"
+                id="registeremail"
+                name="user[email]"                  
+                placeholder="留个邮箱呗"
+              )
+          .form-group
+            label.col-md-3.control-label(
+                for="registeradr"
+              ) 地址
+            .col-md-8
+              input.form-control(
+                type="text"
+                id="registeradr"
+                name="user[address]"                  
+                placeholder="留个地址呗"
+              )
+        .modal-footer 
+          button.btn.btn-default(
+            type="button"
+            data-dismiss="modal"
+          ) 关闭
+          button.btn.btn-success(
+            type="submit"
+          ) 提交
+
+// 登录模态框
+.modal.fade(
+  id="loginmodal"
+  tabindex="-1"
+  role="dialog"
+  aria-labelledby="myModalLabel"
+)
+  .modal-dialog(role="document") 
+    .modal-content
+      .modal-header
+        button.close(
+          type="button"
+          data-dismiss="modal"
+          aria-label="Close"
+        )
+          span(aria-hidden="true") &times;
+        h4.modal-title 登录
+      form.form-horizontal(
+        method="POST"
+        action="/user/login"
+        onsubmit="return check('login')"
+      ) 
+        .modal-body
+          .form-group
+            label.col-md-3.control-label(
+                for="loginname"
+              ) 用户名
+            .col-md-8
+              input.form-control(
+                type="text"
+                id="loginname"
+                name="user[name]"
+                placeholder="还记得自己的用户名么？"
+              )
+          .form-group
+            label.col-md-3.control-label(
+                for="loginpsw"
+              ) 密码
+            .col-md-8
+              input.form-control(
+                type="password"
+                id="loginpsw"
+                name="user[password]"
+                placeholder="还记得自己的密码么？"
+              )
+        .modal-footer 
+          button.btn.btn-default(
+            type="button"
+            data-dismiss="modal"
+          ) 关闭
+          button.btn.btn-success(
+            type="submit"
+          ) 提交

@@ -1,0 +1,61 @@
+extends ../layout
+
+block content
+  .result.row
+    .col-sm-8.col-sm-offset-2
+      - if (match.length != 0)
+        each item in match
+          article
+            .row
+              h4.mes-title
+                - if(type == 'lost')
+                  | 丢失信息
+                - else
+                  | 拾取信息
+            .row
+              .mes-left.col-md-3
+                span.glyphicon.glyphicon-user(
+                  aria-hidden="true"
+                ) &nbsp;
+                p #{user.name}
+                - if (item.userphone)
+                  p 手机: #{item.userphone}
+                - if (item.userQQ)
+                  p QQ: #{item.userQQ}
+                - if (item.useremail)
+                  p Eamil: #{item.useremail}
+                - if (item.usercollege)
+                  p 学院: #{item.usercollege}
+              .mes-right.col-md-9
+                .mes-right-up
+                  p
+                    | 时间: #{item.year}年 
+                    - if (item.month != -1) 
+                      | #{item.month}月
+                    - if (item.day != -1)
+                      | #{item.day}日 
+                    - if (item.time != -1) 
+                      | #{item.time}
+                  p
+                    | 我
+                    - if (item.place)
+                      | 在<strong>#{item.place}</strong>
+                    - if (type == 'lost')
+                      | 丢失
+                    - else
+                      | 拾取
+                    | 一张<strong>#{item.cardtype}</strong>，卡号是#{item.number}！
+                hr
+                .mes-right-down
+                  p
+                    | 附加信息：
+                    - if (item.detail)
+                      | #{item.detail}
+                    - else
+                      | 无
+      - else
+        p.searchtitle 未找到匹配信息
+      br
+      a.btn.btn-success(
+        href="/index"
+      ) 返回首页

@@ -1,0 +1,46 @@
+extends users
+
+block usercontent
+  .col-sm-8.col-sm-offset-2
+    - if (userfound.length != 0)
+      each item in userfound
+        article
+          .mes-head
+            h4.mes-title 拾取信息
+          hr
+          .mes-right-up
+            p
+              | 时间: #{item.year}年 
+              - if (item.month != -1) 
+                | #{item.month}月
+              - if (item.day != -1)
+                | #{item.day}日 
+              - if (item.time != -1) 
+                | #{item.time}
+            p
+              | 我
+              - if (item.place)
+                | 在<strong>#{item.place}</strong>
+              | 拾取一张<strong>#{item.cardtype}</strong>，卡号是#{item.number}！
+          .mes-right-down
+            p
+              | 附加信息：
+              - if (item.detail)
+                | #{item.detail}
+              - else
+                | 无
+          hr
+          .mes-footer
+            .row
+              a.btn.btn-success.btn-sm(
+                type="button"
+                href="/user/userlost?action=deletelostmes&cardtype="+item.cardtype+"&number="+item.number
+              )
+                span.glyphicon.glyphicon-remove(
+                  aria-hidden="true"
+                )
+    - else
+      .message
+        p.plain 你好像还没有发布信息呢!
+        p
+          a.link(href="/message/found") 点此发布信息

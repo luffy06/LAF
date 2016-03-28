@@ -1,0 +1,31 @@
+extends users
+
+block usercontent
+  - var iterm = ['username', 'useremail', 'userphone', 'userQQ', 'usercollege', 'useraddress']
+  - var type = ['email', 'phone', 'QQ', 'college', 'address']
+  mixin userdetail(i, item, val)
+    .row(
+      id="edit"+iterm[i]
+    )
+      .col-sm-3
+        p.plain.detail= item
+      .col-sm-7
+        p.plain.detail= val
+    br
+
+  .row
+    h3.usertitle 基本信息
+  hr
+  +userdetail(0, "用户名", user.name)
+  +userdetail(1, "邮箱", user.email)
+  +userdetail(2, "手机", user.phone)
+  +userdetail(3, "QQ", user.QQ)
+  +userdetail(4, "学院", user.college)
+  +userdetail(5, "地址", user.address)
+
+  hr
+  a.btn.btn-success(
+    type="button"
+    id="updatedetail"
+    href="/user/userupdate"
+  ) 修改信息

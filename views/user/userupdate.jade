@@ -1,0 +1,48 @@
+extends users
+
+block usercontent
+  - var iterm = ['name', 'email', 'phone', 'QQ', 'college', 'adr']
+  mixin userdetail(i, item, val)
+    .row
+      .col-sm-3
+        p.plain.detail= item
+      .col-sm-7
+        - if (i > 0)
+          - if (i != 1)
+            input(
+              id="edit"+iterm[i]
+              type="text"
+              value=val
+              name="user["+iterm[i]+"]"
+            )
+          - else
+            input(
+              id="edit"+iterm[i]
+              type="email"
+              value=val
+              name="user["+iterm[i]+"]"
+            )
+        - else
+          p.plain.detail= val
+    br
+
+  .row
+    h3.usertitle 基本信息
+  hr
+  form(
+    method="post"
+    action="/user/userupdate"
+    onsubmit="return check('edit')"
+  )
+    +userdetail(0, "用户名", user.name)
+    +userdetail(1, "邮箱", user.email)
+    +userdetail(2, "手机", user.phone)
+    +userdetail(3, "QQ", user.QQ)
+    +userdetail(4, "学院", user.college)
+    +userdetail(5, "地址", user.address)
+
+    hr
+    button.btn.btn-success(
+      type="submit"
+      id="updatedetail"
+    ) 保存

@@ -1,0 +1,40 @@
+extends ../layout
+
+block content
+  .search
+    form(
+      action="/search/go"
+      method="post"
+    )
+      .row
+        .col-md-3.col-md-offset-3
+          label.radio-inline.searchtitle
+            input(
+              type="radio"
+              id="inlineCheckbox1"
+              name="type"
+              value="lost"
+            )
+            | &nbsp;丢失
+        .col-md-3
+          label.radio-inline.searchtitle
+            input(
+              type="radio"
+              name="type"
+              id="inlineCheckbox2"
+              value="found"
+            )
+            | &nbsp;拾取
+      br
+      .row
+        .col-md-6.col-md-offset-3
+          .input-group
+            input.form-control(
+              type="text"
+              placeholder="请输入你要查询的卡号!"
+              name="number"
+            )
+            span.input-group-btn
+              button.btn.btn-default(
+                type="submit"
+              ) Go!

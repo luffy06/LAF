@@ -1,0 +1,106 @@
+body {
+  padding-top: 60px;
+  padding-bottom: 40px;
+  font: 20px "Lucida Grande", Microsoft YaHei, Helvetica, Arial, sans-serif;
+  text-align: center;
+  background-image: url(/img/background6.jpg);
+  background-attachment: fixed;
+}
+
+.indextop {
+  margin-top: 100px;
+  margin-bottom: 132px;
+}
+
+article {
+  background-color: white;
+  border-radius: 5px;
+  border: 1px solid #6699CC;
+  margin-bottom: 10px;
+  padding-bottom: 20px;
+  padding-top: 20px;
+}
+
+.article_text {
+  text-align: left;
+}
+
+.mes-right {
+  text-align: left;
+}
+
+.post {
+  background-color: white;
+  border: 1px solid #6699CC;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.footer {
+  width: 1170px;
+  position: absolute;
+}
+
+.post-head > p {
+  font-family: Helvetica;
+  font-size: 30px;
+  margin-top: 10px;
+}
+
+.post-content {
+  margin-bottom: 10px;
+}
+
+.post-footer {
+  margin-top: -5px;
+  margin-bottom: 5px;
+}
+
+.post-label {
+  margin-top: 5px;
+  font-family: Helvetica;
+  font-size: 20px;
+}
+
+.post-input {
+  margin-bottom: 10px;
+}
+
+.sidebar > ul {
+  font-size: 20px;
+  font-family: NSimSun, Microsoft YaHei, Helvetica;
+}
+
+.thstyle {
+  text-align: center;
+}
+
+.detail {
+  font-size: 20px;
+}
+
+.usertitle {
+  color: #912CEE;
+}
+
+.plain {
+  color: #8B1A1A;
+}
+
+.link {
+  color: blue;
+}
+
+.searchtitle {
+  font-size: 20px;
+  color: black;
+  font-family: NSimSun, Microsoft YaHei, Helvetica;
+}
+
+.message
+.search,
+.result,
+.error {
+  margin-top: 200px;
+  margin-bottom: 250px;
+}

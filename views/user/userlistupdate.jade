@@ -1,0 +1,64 @@
+extends users
+
+block usercontent
+  .row
+    form(
+      action="/user/userlist/update?name="+edituser.name
+      method="post"
+    )
+      table.table.table-hover
+        tr
+          td 用户名
+          td= edituser.name
+        tr
+          td 用户角色
+          - if (edituser.role == 0)
+            td 普通用户
+          - else if (edituser.role == 1)
+            td 管理员
+          - else
+            td 超级管理员
+        tr
+          td 邮箱
+          td
+            input(
+              type="email"
+              value=edituser.email
+              name="edit[email]"
+            )
+        tr
+          td 电话
+          td
+            input(
+              type="text"
+              value=edituser.phone
+              name="edit[phone]"
+            )
+        tr
+          td QQ
+          td
+            input(
+                type="text"
+                value=edituser.QQ
+                name="edit[QQ]"
+              )
+        tr
+          td 学院
+          td
+            input(
+                type="text"
+                value=edituser.college
+                name="edit[college]"
+              )
+        tr
+          td 地址
+          td
+            input(
+              type="text"
+              value=edituser.address
+              name="edit[address]"
+            )
+      hr
+      button.btn.btn-success(
+        type="submit"
+      ) 提交

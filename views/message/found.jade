@@ -1,0 +1,165 @@
+extends ../layout
+
+block content
+  .col-sm-8.col-sm-offset-2
+    .post
+      form(
+        method="post"
+        action="/message/found/postfoundmes"
+        onsubmit="return post('found')"
+      )
+        .post-head
+          p 你找到啥？
+        hr
+        .post-content.col-sm-offset-1
+          .row
+            .form-group
+              label.col-md-2.control-label.post-label(
+                for="text"
+              ) 类型
+              .col-md-3.post-input
+                input.form-control(
+                  for="text"
+                  id="foundcardtype"
+                  name="found[cardtype]"
+                  placeholder="卡的类型"
+                )
+              label.col-md-2.control-label.post-label(
+                for="text"
+              ) 卡号
+              .col-md-4.post-input
+                input.form-control(
+                  for="number"
+                  id="foundnumber"
+                  name="found[number]"
+                  placeholder="卡号"
+                )
+          .row
+            .form-group
+              label.col-md-2.control-label.post-label(
+                for="text"
+              ) 时间
+              .col-md-2.post-input
+                select.form-control#found_select_year(
+                  name="found[year]"
+                )
+                  option(
+                    value=2015
+                  ) 2015
+                  option(
+                    value=2016
+                  ) 2016
+              .col-md-2.post-input
+                select.form-control#found_select_month(
+                  name="found[month]"
+                )
+                  - for (var i = 0; i <= 12; i++)
+                    - if (i === 0)
+                      option(
+                        value=-1
+                      ) 不确定
+                    - else
+                      option(
+                        value=i
+                      )= i
+              .col-md-2.post-input
+                - var selmon = 1;
+                select.form-control#found_select_day(
+                  name="found[day]"
+                )
+                  option(
+                    value=-1
+                  ) 不确定
+                  - var day = [0, 31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+                  - for (var i = 1; i <= day[selmon]; i++)
+                    option(
+                      value=i
+                    )= i
+              .col-md-3.post-input
+                select.form-control#found_select_time(
+                  name="found[time]"
+                )
+                  option(
+                    value="-1"
+                  ) 不确定
+                  option(
+                    value="上午"
+                  ) 上午
+                  option(
+                    value="中午"
+                  ) 中午
+                  option(
+                    value="下午"
+                  ) 下午
+                  option(
+                    value="晚上"
+                  ) 晚上
+          .row
+            .form-group
+              .col-md-2
+                label.control-label.post-label(
+                  for="text"
+                ) 地点
+              .col-md-9.post-input
+                input.form-control(
+                  type="text"
+                  placeholder="你是在哪里捡的呢？"
+                  name="found[place]"
+                )
+              .col-md-1
+          .row
+            .form-group
+              .col-md-2
+                label.control-label.post-label(
+                  for="text"
+                ) 详细
+              .col-md-9.post-input
+                input.form-control(
+                  type="text"
+                  placeholder="留下您的联系方式，以便大家能找到您哟。"
+                  name="found[detail]"
+                )
+              .col-md-1
+        hr
+        .post-footer
+          button.btn.btn-success(type="submit") 嗖
+    .mes
+      each item in foundmes
+        article
+          .row
+            .mes-left.col-md-3
+              span.glyphicon.glyphicon-user(
+                aria-hidden="true"
+              ) &nbsp;
+              p #{item.username}
+              - if (item.userphone)
+                p 手机: #{item.userphone}
+              - if (item.userQQ)
+                p QQ: #{item.userQQ}
+              - if (item.useremail)
+                p Eamil: #{item.useremail}
+              - if (item.usercollege)
+                p 学院: #{item.usercollege}
+            .mes-right.col-md-9
+              .mes-right-up
+                p
+                  | 时间: #{item.year}年 
+                  - if (item.month != -1) 
+                    | #{item.month}月
+                  - if (item.day != -1)
+                    | #{item.day}日 
+                  - if (item.time != -1) 
+                    | #{item.time}
+                p
+                  | 我
+                  - if (item.place)
+                    | 在<strong>#{item.place}</strong>
+                  | 拾取一张<strong>#{item.cardtype}</strong>，卡号是#{item.number}！
+              hr
+              .mes-right-down
+                p
+                  | 附加信息：
+                  - if (item.detail)
+                    | #{item.detail}
+                  - else
+                    | 无
