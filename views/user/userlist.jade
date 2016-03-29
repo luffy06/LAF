@@ -13,9 +13,9 @@ block usercontent
           th.thstyle QQ
           th.thstyle 学院          
           th.thstyle 地址
+          th.thstyle 修改
+          th.thstyle 删除
           - if (user.role == 2)
-            th.thstyle 修改
-            th.thstyle 删除
             th.thstyle 权限
       tbody
         - var i = 1
@@ -36,17 +36,16 @@ block usercontent
                 td= u.QQ
                 td= u.college
                 td= u.address
-                - if (user.role == 2)
-                  td
-                    a.btn.btn-success.btn-sm(
-                      type="button"
-                      href="/user/userupdate"
+                td
+                  a.btn.btn-success.btn-sm(
+                    type="button"
+                    href="/user/userupdate"
+                  )
+                    span.glyphicon.glyphicon-pencil(
+                      aria-hidden="true"
                     )
-                      span.glyphicon.glyphicon-pencil(
-                        aria-hidden="true"
-                      )
-                  td
-                  td
+                td
+                td
                 - i = i + 1
             - else
               - if (u.role == 2)
@@ -69,26 +68,24 @@ block usercontent
                 td= u.QQ
                 td= u.college
                 td= u.address
-                - if (user.role == 2)
-                  td
-                    - if (u.role != 2)  
-                      a.btn.btn-success.btn-sm(
-                        type="button"
-                        href="/user/userlist?action=edituser&name="+u.name
+                td
+                  - if (u.role < user.role)  
+                    a.btn.btn-success.btn-sm(
+                      type="button"
+                      href="/user/userlist?action=edituser&name="+u.name
+                    )
+                      span.glyphicon.glyphicon-pencil(
+                        aria-hidden="true"
                       )
-                        span.glyphicon.glyphicon-pencil(
-                          aria-hidden="true"
-                        )
-                - if (user.role == 2)
-                  td
-                    - if (u.role != 2)  
-                      a.btn.btn-success.btn-sm(
-                        type="button"
-                        href="/user/userlist?action=deleteuser&name="+u.name
+                td
+                  - if (u.role < user.role)  
+                    a.btn.btn-success.btn-sm(
+                      type="button"
+                      href="/user/userlist?action=deleteuser&name="+u.name
+                    )
+                      span.glyphicon.glyphicon-remove(
+                        aria-hidden="true"
                       )
-                        span.glyphicon.glyphicon-remove(
-                          aria-hidden="true"
-                        )
                 - if (user.role == 2)
                   td
                     - if (u.role == 0)
@@ -107,4 +104,6 @@ block usercontent
                         span.glyphicon.glyphicon-arrow-down(
                           aria-hidden="true"
                         )
+                - else
+                  td
                 - i = i + 1
