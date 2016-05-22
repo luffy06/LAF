@@ -1,3 +1,4 @@
+// 引入所需的包
 var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
@@ -6,20 +7,28 @@ var session = require('express-session');
 var multer = require('multer');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+
+// 数据库相关包
 var mongoose = require('mongoose');
 var mongoStore = require('connect-mongo')(session);
 var fs = require('fs');
+
+// 数据库链接
 var dbUrl = 'mongodb://localhost/card';
+
+// 创建项目
 var app = express();
 
+// 连接数据库
 mongoose.connect(dbUrl);
 
+// 引入自定义路由
 var User = require('./routes/user');
 var Index = require('./routes/index');
 var Message = require('./routes/message');
 var Search = require('./routes/search');
 
-// view engine setup
+// 设置页面引擎为jade
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
 
@@ -40,6 +49,7 @@ app.use(session({
   })
 }));
 
+// 初始化，判断session中是否有用户
 app.use(function(req, res, next) {
   var _user = req.session.user;
   if (_user)
@@ -49,17 +59,26 @@ app.use(function(req, res, next) {
   next()
 });
 
+// 首页
 app.use(Index);
+
+// 登出
 app.use('/user/logout', function(req, res) {
   delete req.session.user;
   delete app.locals.user;
   return res.redirect('/');
 });
+
+// 用户相关
 app.use('/user', User);
+
+// 信息相关
 app.use('/message', Message);
+
+// 搜索相关
 app.use('/search', Search);
 
-// catch 404 and forward to error handler
+// 404等错误处理
 app.use(function(req, res, next) {
   var err = new Error('Not Found');
   err.status = 404;

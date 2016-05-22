@@ -2,18 +2,21 @@ extends ../layout
 
 block content
   .col-sm-8.col-sm-offset-2
+    //- 发布框，发布后调用js中的post方法检测合法性
     .post
       form(
         method="post"
         action="/message/lost/postlostmes"
         onsubmit="return post('lost')"
       )
+        //- 标题
         .post-head
           p 你丢了啥？
         hr
         .post-content.col-sm-offset-1
           .row
             .form-group
+              //- 卡类型
               label.col-md-2.control-label.post-label(
                 for="text"
               ) 类型
@@ -24,6 +27,7 @@ block content
                   name="lost[cardtype]"
                   placeholder="卡的类型"
                 )
+              //- 卡号
               label.col-md-2.control-label.post-label(
                 for="text"
               ) 卡号
@@ -36,6 +40,7 @@ block content
                 )
           .row
             .form-group
+              //- 时间选项卡
               label.col-md-2.control-label.post-label(
                 for="text"
               ) 时间
@@ -49,6 +54,7 @@ block content
                   option(
                     value=2016
                   ) 2016
+              //- 月份选择
               .col-md-2.post-input
                 select.form-control#lost_select_month(
                   name="lost[month]"
@@ -62,6 +68,7 @@ block content
                       option(
                         value=i
                       )= i
+              //- 日选择
               .col-md-2.post-input
                 - var selmon = 1;
                 select.form-control#lost_select_day(
@@ -75,6 +82,7 @@ block content
                     option(
                       value=i
                     )= i
+              //- 具体时间选择
               .col-md-3.post-input
                 select.form-control#lost_select_time(
                   name="lost[time]"
@@ -96,6 +104,7 @@ block content
                   ) 晚上
           .row
             .form-group
+              //- 地点选择
               .col-md-2
                 label.control-label.post-label(
                   for="text"
@@ -109,6 +118,7 @@ block content
               .col-md-1
           .row
             .form-group
+              //- 详细说明
               .col-md-2
                 label.control-label.post-label(
                   for="text"
@@ -122,11 +132,15 @@ block content
               .col-md-1
         hr
         .post-footer
+          //- 提交按钮
           button.btn.btn-success(type="submit") 嗖
+    //- 信息框
     .mes
+      //- 对所有丢失信息
       each item in lostmes
         article
           .row
+            //- 信息框左部，显示丢失人信息
             .mes-left.col-md-3
               span.glyphicon.glyphicon-user(
                 aria-hidden="true"
@@ -140,8 +154,10 @@ block content
                 p Eamil: #{item.useremail}
               - if (item.usercollege)
                 p 学院: #{item.usercollege}
+            //- 信息框右部，显示丢失信息
             .mes-right.col-md-9
               .mes-right-up
+                //- 丢失时间
                 p
                   | 时间: #{item.year}年 
                   - if (item.month != -1) 
@@ -150,6 +166,7 @@ block content
                     | #{item.day}日 
                   - if (item.time != -1) 
                     | #{item.time}
+                //- 丢失信息
                 p
                   | 我
                   - if (item.place)
@@ -157,6 +174,7 @@ block content
                   | 丢失一张<strong>#{item.cardtype}</strong>，卡号是#{item.number}！
               hr
               .mes-right-down
+                //- 附加信息
                 p
                   | 附加信息：
                   - if (item.detail)

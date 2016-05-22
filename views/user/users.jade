@@ -3,7 +3,9 @@ extends ../layout
 block content
   .row
     .col-sm-3.sidebar
+      //- 个人中心左侧列表
       ul.nav.nav-pills.nav-stacked.list-group
+        //- 个人中心下拉框
         li
           .panel-group#accordion0(
             role="tablist"
@@ -27,11 +29,14 @@ block content
                 aria-labelledby="usercenter"
               )
                 ul.list-group
+                  //- 个人信息
                   li.list-group-item
                     a(href="/user/userdetail") 个人信息
+                  //- 修改密码
                   li.list-group-item
                     a(href="/user/userpassword") 修改密码
         li.divider(role="separator")
+        //- 丢失信息下拉框
         li
           .panel-group#accordion1(
             role="tablist"
@@ -55,9 +60,11 @@ block content
                 aria-labelledby="usercenter"
               )
                 ul.list-group
+                  //- 用户丢失信息
                   li.list-group-item
                     a(href="/user/userlost") 用户丢失信息
         li.divider(role="separator")
+        //- 拾取信息下拉框
         li
           .panel-group#accordion2(
             role="tablist"
@@ -81,12 +88,16 @@ block content
                 aria-labelledby="usercenter"
               )
                 ul.list-group
+                  //- 用户拾取信息
                   li.list-group-item
                     a(href="/user/userfound") 用户拾取信息
+        //- 用户为管理员或超级管理员时显示
         - if (user.role >= 1)
           li.divider(role="separator")
+          //- 用户列表
           li
             a(href="/user/userlist") 用户列表
     .col-sm-9
       br
+      //- 引入块内容
       block usercontent

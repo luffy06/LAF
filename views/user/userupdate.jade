@@ -1,7 +1,9 @@
 extends users
 
 block usercontent
+  //- 定义选项数组
   - var iterm = ['name', 'email', 'phone', 'QQ', 'college', 'adr']
+  //- 定义单个选项展示mixin
   mixin userdetail(i, item, val)
     .row
       .col-sm-3
@@ -29,11 +31,13 @@ block usercontent
   .row
     h3.usertitle 基本信息
   hr
+  //- 修改个人信息，提交时先利用js中的check函数进行检测
   form(
     method="post"
     action="/user/userupdate"
     onsubmit="return check('edit')"
   )
+    //- 修改个人信息每个项目
     +userdetail(0, "用户名", user.name)
     +userdetail(1, "邮箱", user.email)
     +userdetail(2, "手机", user.phone)
@@ -42,6 +46,7 @@ block usercontent
     +userdetail(5, "地址", user.address)
 
     hr
+    //- 保存按钮
     button.btn.btn-success(
       type="submit"
       id="updatedetail"

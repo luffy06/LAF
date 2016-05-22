@@ -7,14 +7,19 @@ html(lang="en")
       content="width=device-width, initial-scale=1"
     )
     title= title
+    //- 引入css
     link(rel="stylesheet" href="/stylesheets/main.css")
     link(rel="stylesheet" href="/bower_components/bootstrap/dist/css/bootstrap.css")
   body
+    //- 包含头部页面
     include page/header
     .container
       .row
+        //- 中心内容
         block content
+      //- 包含底部页面
       include page/footer
+    //- 引入js
     script(src="/bower_components/jquery/dist/jquery.js")
     script(src="/bower_components/bootstrap/dist/js/bootstrap.js")
     script(src="/bower_components/bootstrap/js/collapse.js")

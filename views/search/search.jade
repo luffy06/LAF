@@ -1,12 +1,15 @@
 extends ../layout
 
 block content
+  //- 搜索框
   .search
     form(
       action="/search/go"
       method="post"
     )
+      //- 类型选择
       .row
+        //- 丢失类型
         .col-md-3.col-md-offset-3
           label.radio-inline.searchtitle
             input(
@@ -16,6 +19,7 @@ block content
               value="lost"
             )
             | &nbsp;丢失
+        //- 拾取类型
         .col-md-3
           label.radio-inline.searchtitle
             input(
@@ -29,11 +33,13 @@ block content
       .row
         .col-md-6.col-md-offset-3
           .input-group
+            //- 卡号输入
             input.form-control(
               type="text"
               placeholder="请输入你要查询的卡号!"
               name="number"
             )
+            //- 提交按钮
             span.input-group-btn
               button.btn.btn-default(
                 type="submit"

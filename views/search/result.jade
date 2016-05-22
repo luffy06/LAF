@@ -1,11 +1,14 @@
 extends ../layout
 
 block content
+  //- 搜索结果
   .result.row
     .col-sm-8.col-sm-offset-2
       - if (match.length != 0)
+        //- 搜索到结果，对所有搜索到的结果
         each item in match
           article
+            //- 信息类型
             .row
               h4.mes-title
                 - if(type == 'lost')
@@ -13,6 +16,7 @@ block content
                 - else
                   | 拾取信息
             .row
+              //- 信息框左部，显示丢失/拾取人信息
               .mes-left.col-md-3
                 span.glyphicon.glyphicon-user(
                   aria-hidden="true"
@@ -26,8 +30,10 @@ block content
                   p Eamil: #{item.useremail}
                 - if (item.usercollege)
                   p 学院: #{item.usercollege}
+              //- 信息框右部，显示丢失/拾取信息
               .mes-right.col-md-9
                 .mes-right-up
+                  //- 丢失/拾取时间
                   p
                     | 时间: #{item.year}年 
                     - if (item.month != -1) 
@@ -36,6 +42,7 @@ block content
                       | #{item.day}日 
                     - if (item.time != -1) 
                       | #{item.time}
+                  //- 丢失/拾取信息
                   p
                     | 我
                     - if (item.place)
@@ -47,6 +54,7 @@ block content
                     | 一张<strong>#{item.cardtype}</strong>，卡号是#{item.number}！
                 hr
                 .mes-right-down
+                  //- 附加信息
                   p
                     | 附加信息：
                     - if (item.detail)
@@ -54,8 +62,10 @@ block content
                     - else
                       | 无
       - else
+        //- 未搜索到结果
         p.searchtitle 未找到匹配信息
       br
+      //- 返回首页按钮
       a.btn.btn-success(
         href="/index"
       ) 返回首页

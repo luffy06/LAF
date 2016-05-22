@@ -3,12 +3,17 @@ extends users
 block usercontent
   .col-md-8.col-md-offset-2
     - if (userlost.length != 0)
+      //- 如果该用户存在丢失信息，遍历所有用户丢失信息
       each item in userlost
+        //- 以article块形式展示
         article
+          //- 块头
           .mes-head
             h4.mes-title 丢失信息
           hr
+          //- 块上部
           .mes-right-up
+            //- 丢失时间
             p
               | 时间: #{item.year}年 
               - if (item.month != -1) 
@@ -17,12 +22,15 @@ block usercontent
                 | #{item.day}日 
               - if (item.time != -1) 
                 | #{item.time}
+            //- 丢失地点和丢失物品相关信息
             p
               | 我
               - if (item.place)
                 | 在<strong>#{item.place}</strong>
               | 丢失一张<strong>#{item.cardtype}</strong>，卡号是#{item.number}！
+          //- 块下部
           .mes-right-down
+            //- 附加信息
             p
               | 附加信息：
               - if (item.detail)
@@ -30,8 +38,10 @@ block usercontent
               - else
                 | 无
           hr
+          //- 块底部
           .mes-footer
             .row
+              //- 删除按钮
               a.btn.btn-success.btn-sm(
                 type="button"
                 href="/user/userlost?action=deletelostmes&cardtype="+item.cardtype+"&number="+item.number
@@ -40,7 +50,9 @@ block usercontent
                   aria-hidden="true"
                 )
     - else
+      //- 未发布信息
       .message
         p.plain 你好像还没有发布信息呢!
         p
+          //- 跳转至发布丢失信息页面
           a.link(href="/message/lost") 点此发布信息

@@ -2,14 +2,17 @@ extends users
 
 block usercontent
   .row
+    //- 更新某个用户个人信息
     form(
       action="/user/userlist/update?name="+edituser.name
       method="post"
     )
       table.table.table-hover
+        //- 显示用户名
         tr
           td 用户名
           td= edituser.name
+        //- 显示用户权限
         tr
           td 用户角色
           - if (edituser.role == 0)
@@ -18,6 +21,7 @@ block usercontent
             td 管理员
           - else
             td 超级管理员
+        //- 修改邮箱
         tr
           td 邮箱
           td
@@ -26,6 +30,7 @@ block usercontent
               value=edituser.email
               name="edit[email]"
             )
+        //- 修改电话
         tr
           td 电话
           td
@@ -34,6 +39,7 @@ block usercontent
               value=edituser.phone
               name="edit[phone]"
             )
+        //- 修改QQ
         tr
           td QQ
           td
@@ -42,6 +48,7 @@ block usercontent
                 value=edituser.QQ
                 name="edit[QQ]"
               )
+        //- 修改学院
         tr
           td 学院
           td
@@ -50,6 +57,7 @@ block usercontent
                 value=edituser.college
                 name="edit[college]"
               )
+        //- 修改地址
         tr
           td 地址
           td
@@ -59,6 +67,7 @@ block usercontent
               name="edit[address]"
             )
       hr
+      //- 提交按钮
       button.btn.btn-success(
         type="submit"
       ) 提交

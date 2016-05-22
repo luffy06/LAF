@@ -1,8 +1,10 @@
 extends users
 
 block usercontent
+  //- 定义选项数组
   - var iterm = ['username', 'useremail', 'userphone', 'userQQ', 'usercollege', 'useraddress']
   - var type = ['email', 'phone', 'QQ', 'college', 'address']
+  //- 定义单个选项展示mixin，利用mixin可节省代码
   mixin userdetail(i, item, val)
     .row(
       id="edit"+iterm[i]
@@ -16,6 +18,7 @@ block usercontent
   .row
     h3.usertitle 基本信息
   hr
+  //- 修改个人信息每个项目
   +userdetail(0, "用户名", user.name)
   +userdetail(1, "邮箱", user.email)
   +userdetail(2, "手机", user.phone)
@@ -24,6 +27,7 @@ block usercontent
   +userdetail(5, "地址", user.address)
 
   hr
+  //- 修改信息按钮
   a.btn.btn-success(
     type="button"
     id="updatedetail"

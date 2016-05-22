@@ -2,7 +2,9 @@ extends users
 
 block usercontent
   .row.table-responesive
+    //- 用户列表表格
     table.table.table-hover
+      //- 表格每列标题
       thead
         tr
           th
@@ -15,14 +17,20 @@ block usercontent
           th.thstyle 地址
           th.thstyle 修改
           th.thstyle 删除
+          //- 只有超级管理员才可以管理权限
           - if (user.role == 2)
             th.thstyle 权限
+      //- 表格主体
       tbody
         - var i = 1
+        //- 遍历所有用户
         each u in userlist
           - if (user.role >= u.role)
+            //- 若用户i权限小于等于当前用户权限
             - if (user.name == u.name)
+              //- 若为当前用户
               tr.warning
+                //- 显示相关信息
                 td= i
                 td= u.name
                 - if (u.role == 0)
@@ -36,6 +44,7 @@ block usercontent
                 td= u.QQ
                 td= u.college
                 td= u.address
+                //- 编辑个人信息按钮
                 td
                   a.btn.btn-success.btn-sm(
                     type="button"
@@ -48,6 +57,7 @@ block usercontent
                 td
                 - i = i + 1
             - else
+              //- 若不为当前用户
               - if (u.role == 2)
                 - type = "success"
               - else if (u.role == 1)
@@ -55,6 +65,7 @@ block usercontent
               - else
                 - type = "danger"
               tr(class=type)
+                //- 显示用户i的相关信息
                 td= i
                 td= u.name
                 - if (u.role == 0)
@@ -69,6 +80,7 @@ block usercontent
                 td= u.college
                 td= u.address
                 td
+                  //- 当用户i权限严格小于当前用户权限时，当前用户可编辑其个人信息
                   - if (u.role < user.role)  
                     a.btn.btn-success.btn-sm(
                       type="button"
@@ -78,6 +90,7 @@ block usercontent
                         aria-hidden="true"
                       )
                 td
+                  //- 当用户i权限严格小于当前用户权限时，当前用户可删除该用户
                   - if (u.role < user.role)  
                     a.btn.btn-success.btn-sm(
                       type="button"
@@ -87,8 +100,10 @@ block usercontent
                         aria-hidden="true"
                       )
                 - if (user.role == 2)
+                  //- 提升/降低权限功能，只限于超级管理员
                   td
                     - if (u.role == 0)
+                      //- 普通用户可被提升权限
                       a.btn.btn-success.btn-sm(
                         type="button"
                         href="/user/userlist?action=upuserlevel&name="+u.name
@@ -97,6 +112,7 @@ block usercontent
                           aria-hidden="true"
                         )
                     - else if (u.role == 1)
+                      //- 管理员可被降低权限
                       a.btn.btn-success.btn-sm(
                         type="button"
                         href="/user/userlist?action=downuserlevel&name="+u.name

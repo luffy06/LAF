@@ -1,6 +1,8 @@
+// 引入mongoose数据库管理，引入用户模式
 var mongoose = require('mongoose');
 var User = require('./user');
 
+// 拾取信息模式定义
 var foundSchema = new mongoose.Schema({
   username: String,
   useremail: String,
@@ -27,8 +29,11 @@ var foundSchema = new mongoose.Schema({
   }
 });
 
+// 保存信息前预先处理
 foundSchema.pre('save', function(next) {
   var found = this;
+
+  // 设置更新时间
   if (this.isNew) {
     this.meta.createAt = this.meta.updateAt = Date.now()
   }
@@ -38,7 +43,9 @@ foundSchema.pre('save', function(next) {
   next();
 });
 
+// 静态方法
 foundSchema.statics = {
+  // 根据cmp来获取更新拾取信息并排序
   fetch: function(cmp, cb) {
     return this
       .find({})
