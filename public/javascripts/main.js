@@ -10,10 +10,10 @@ $('#loginmodal').on('shown.bs.modal', function() {
 
 // 数字检测
 function isNumber(toCheck) {
-  var number = /[0-9]+$/;
-  if (number.exec(toCheck))
-    return true;
-  return false;
+  var number = /^[0-9]+$/;
+  if (!number.exec(toCheck))
+    return false;
+  return true;
 }
 
 // 发布信息规则检测
@@ -39,7 +39,7 @@ function post(name) {
 // 用户名规则检测
 function checkName(name) {
   // 定义用户名正则式
-  var stname = /([a-z]|[A-Z]|_|[0-9])+$/;
+  var stname = /^([a-z]|[A-Z]|_|[0-9])+$/;
   // 用户名不为空
   if (name == "") {
     alert("用户名不能为空!");
@@ -76,7 +76,7 @@ function checkPsw(psw, pswconf) {
 // 联系方式规则检测
 function checkContact(phone, QQ, email, address, college) {
   // 手机号码正则式
-  var stphone = /[\+]?([0-9]{3,4}[-])?[0-9]+$/;
+  var stphone = /^[\+]?([0-9]{3,4}[-])?[0-9]+$/;
   // 联系方式不可均为空
   if (phone == "" && QQ == "" && email == "" && address == "" && college == "") {
     alert("至少留个联系方式吧！手机、QQ、email、地址、学院都可以呢！");

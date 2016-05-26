@@ -11,7 +11,7 @@ block content
             //- 信息类型
             .row
               h4.mes-title
-                - if(type == 'lost')
+                - if (type == 'lost')
                   | 丢失信息
                 - else
                   | 拾取信息
@@ -21,7 +21,7 @@ block content
                 span.glyphicon.glyphicon-user(
                   aria-hidden="true"
                 ) &nbsp;
-                p #{user.name}
+                p #{item.username}
                 - if (item.userphone)
                   p 手机: #{item.userphone}
                 - if (item.userQQ)
