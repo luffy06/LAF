@@ -7,6 +7,7 @@ exports.init = function(req, res) {
   user.name = "admin";
   user.password = "123456";
   user.QQ = "534427411";
+  user.role = 2;
   User.findOne({name: user.name}, function(err, _user) {
     if (err) {
       console.log(err);
@@ -14,8 +15,9 @@ exports.init = function(req, res) {
         message: err
       });
     }
+    console.log(user);
     console.log("In index init!")
-    if (!user) {
+    if (!_user) {
       console.log("admin not exist!")
       user.save(function(err, res_user) {
         if (err) {
